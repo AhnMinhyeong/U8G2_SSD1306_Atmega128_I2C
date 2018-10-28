@@ -7,6 +7,7 @@
 #define OLED_ADDR (0x3D<<1)
 
 u8g2_t u8g2;
+//u8g2_t u8g2_ks0108;
 
 uint8_t u8x8_byte_hw_i2c(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
 {
@@ -65,6 +66,7 @@ uint8_t gpio_and_delay_atmega128(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, voi
 		case U8X8_MSG_DELAY_MILLI:			// delay arg_int * 1 milli second
 		_delay_ms(arg_int);
 		break;
+
 	}
 	return 1;
 }
@@ -113,6 +115,7 @@ void init_ssd1306(void)
 		i2c_Stop();
 	}
 }
+
 int main(void)
 {
 	DDRC=0x10;
@@ -120,6 +123,7 @@ int main(void)
 	DDRD=0x08;
 	
 	init_ssd1306();
+	//u8g2_Setup_ks0108_128x64_f(&u8g2_ks0108,U8G2_R0,u8x8_byte_ks0108,ks0108_gpio_init)
 	u8g2_Setup_ssd1306_i2c_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_hw_i2c, gpio_and_delay_atmega128);
 	u8g2_SetFont(&u8g2,u8g2_font_ncenB08_tf);
 	u8g2_ClearBuffer(&u8g2);
