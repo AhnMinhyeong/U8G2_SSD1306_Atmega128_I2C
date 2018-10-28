@@ -657,6 +657,7 @@ _delay_loop_2(uint16_t __count)
      bd2:	01 97       	sbiw	r24, 0x01	; 1
      bd4:	f1 f7       	brne	.-4      	; 0xbd2 <gpio_and_delay_atmega128+0xae>
 		break;
+
 	}
 	return 1;
 }
@@ -863,6 +864,7 @@ void init_ssd1306(void)
      cdc:	08 95       	ret
 
 00000cde <main>:
+
 int main(void)
 {
      cde:	2f 92       	push	r2
@@ -894,6 +896,7 @@ int main(void)
 	
 	init_ssd1306();
      d0c:	6e df       	rcall	.-292    	; 0xbea <init_ssd1306>
+	//u8g2_Setup_ks0108_128x64_f(&u8g2_ks0108,U8G2_R0,u8x8_byte_ks0108,ks0108_gpio_init)
 	u8g2_Setup_ssd1306_i2c_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_hw_i2c, gpio_and_delay_atmega128);
      d0e:	08 e8       	ldi	r16, 0x88	; 136
      d10:	15 e0       	ldi	r17, 0x05	; 5
@@ -1083,9 +1086,9 @@ int main(void)
      dfe:	be cf       	rjmp	.-132    	; 0xd7c <main+0x9e>
 
 00000e00 <u8x8_byte_hw_i2c>:
-#define OLED_ADDR (0x3D<<1)
 
 u8g2_t u8g2;
+//u8g2_t u8g2_ks0108;
 
 uint8_t u8x8_byte_hw_i2c(u8x8_t *u8x8, uint8_t msg, uint8_t arg_int, void *arg_ptr)
 {
