@@ -118,9 +118,8 @@ void init_ssd1306(void)
 
 int main(void)
 {
-	DDRC=0x10;
-	PORTC=0x0f;
-	DDRD=0x08;
+	DDRD=0x88;
+	PORTD=0x70;
 	
 	init_ssd1306();
 	//u8g2_Setup_ks0108_128x64_f(&u8g2_ks0108,U8G2_R0,u8x8_byte_ks0108,ks0108_gpio_init)
@@ -131,10 +130,10 @@ int main(void)
 	u8g2_SendBuffer(&u8g2);
     while (1)
     {
-	    switch(PINC&0x0f)
+	    switch(PIND&0x70)
 	    {
-		    case 0x0e:
-		    PORTC|=(1<<4);
+		    case 0x60:
+		    PORTD|=(1<<7);
 
 			u8g2_ClearBuffer(&u8g2);
 			u8g2_DrawStr(&u8g2,0,8,"Hi");
@@ -142,8 +141,8 @@ int main(void)
 		    _delay_ms(100);
 		    break;
 			
-			case 0x0d:
-			PORTC|=(1<<4);
+			case 0x50:
+			PORTD|=(1<<7);
 			u8g2_ClearBuffer(&u8g2);
 			u8g2_DrawStr(&u8g2,0,16,"This is Ahn!");
 			u8g2_DrawRFrame(&u8g2,5,17,50,30,8);
