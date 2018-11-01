@@ -38,8 +38,10 @@ int main(void)
 			u8g2_DrawRFrame(&u8g2,5,17,50,30,8);
 			u8g2_SendBuffer(&u8g2);
 		    _delay_ms(100);
+			break;
+			
 		    default:
-		    PORTC&=~(1<<4);
+		    PORTD&=~(1<<7);
 		    //_delay_ms(300);
 		    break;
 	    }
