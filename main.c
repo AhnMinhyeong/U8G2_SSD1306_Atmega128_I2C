@@ -8,6 +8,8 @@ u8g2_t u8g2;
 
 int main(void)
 {
+	volatile int i=0,j=0;
+	
 	DDRD=0x88;
 	PORTD=0x70;
 	
@@ -24,25 +26,29 @@ int main(void)
 	    {
 		    case 0x60:
 		    PORTD|=(1<<7);
-
+			if(i<64) i+=2;
+			else i=0;
 			u8g2_ClearBuffer(&u8g2);
-			u8g2_DrawStr(&u8g2,0,8,"Hi");
+			u8g2_DrawFrame(&u8g2,0,0,128,64);
+			u8g2_DrawStr(&u8g2,j,i,"Hi");
 			u8g2_SendBuffer(&u8g2);
-		    _delay_ms(100);
+		    _delay_ms(50);
 		    break;
 			
 			case 0x50:
 			PORTD|=(1<<7);
+			if(j<128) j+=2;
+			else j=0;
 			u8g2_ClearBuffer(&u8g2);
-			u8g2_DrawStr(&u8g2,0,16,"This is Ahn!");
-			u8g2_DrawRFrame(&u8g2,5,17,50,30,8);
+			u8g2_DrawFrame(&u8g2,0,0,128,64);
+			u8g2_DrawStr(&u8g2,j,i,"Hi");
 			u8g2_SendBuffer(&u8g2);
-		    _delay_ms(100);
+		    _delay_ms(50);
 			break;
 			
 		    default:
 		    PORTD&=~(1<<7);
-		    //_delay_ms(300);
+		    _delay_ms(50);
 		    break;
 	    }
     }
